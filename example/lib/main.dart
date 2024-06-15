@@ -69,13 +69,13 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   ];
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        if (isDialOpen.value) {
-          isDialOpen.value = false;
-          return false;
+    return PopScope(
+      onPopInvoked: (bool didPop) async {
+        if(didPop) {
+          if (isDialOpen.value) {
+            isDialOpen.value = false;
+          }
         }
-        return true;
       },
       child: Scaffold(
         appBar: AppBar(

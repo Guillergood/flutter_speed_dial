@@ -492,14 +492,14 @@ class _SpeedDialState extends State<SpeedDial>
   @override
   Widget build(BuildContext context) {
     return (kIsWeb || !Platform.isIOS) && widget.closeDialOnPop
-        ? WillPopScope(
+        ? PopScope(
             child: _renderButton(),
-            onWillPop: () async {
-              if (_open) {
-                _toggleChildren();
-                return false;
+            onPopInvoked: (bool didPop) async {
+              if (didPop) {  
+                if (_open) {
+                  _toggleChildren();
+                }
               }
-              return true;
             },
           )
         : _renderButton();
